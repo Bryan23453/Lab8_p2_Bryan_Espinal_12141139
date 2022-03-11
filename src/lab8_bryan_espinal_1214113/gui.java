@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  * @author bryan
  */
 public class gui extends javax.swing.JFrame {
-Color col;
+Color col=white;
 bina bin = new bina("./carros.cbm");
     public gui() {
         initComponents();
@@ -38,7 +38,7 @@ bina bin = new bina("./carros.cbm");
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        barrita = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablita = new javax.swing.JTable();
         corredor = new javax.swing.JComboBox<>();
@@ -73,8 +73,9 @@ bina bin = new bina("./carros.cbm");
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jProgressBar1.setBackground(new java.awt.Color(204, 0, 204));
-        jPanel1.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 680, 80));
+        barrita.setBackground(new java.awt.Color(204, 0, 204));
+        barrita.setMaximum(10);
+        jPanel1.add(barrita, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 680, 80));
 
         tablita.setBackground(new java.awt.Color(204, 153, 255));
         tablita.setModel(new javax.swing.table.DefaultTableModel(
@@ -85,6 +86,11 @@ bina bin = new bina("./carros.cbm");
                 "Identificador", "Corredor", "Distancia"
             }
         ));
+        tablita.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablitaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablita);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 680, 360));
@@ -114,6 +120,11 @@ bina bin = new bina("./carros.cbm");
         jButton2.setBackground(new java.awt.Color(77, 100, 255));
         jButton2.setText("Comenzar");
         jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 90, 40));
 
         jButton1.setBackground(new java.awt.Color(79, 100, 255));
@@ -294,8 +305,27 @@ bina bin = new bina("./carros.cbm");
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-        tablita.removeAll();
+        DefaultTableModel modelo2=new DefaultTableModel() ;
+        modelo2.addColumn("Identificador");
+        modelo2.addColumn("Corredor");
+        modelo2.addColumn("Distancia");
+        tablita.setModel(modelo2);
     }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        for (int i = 0; i < tablita.getRowCount(); i++) {
+                tablita.getValueAt(i, 1);
+                
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void tablitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablitaMouseClicked
+        System.out.println(tablita.getSelectedRow());
+        hilo h=new hilo(barrita , tablita.getValueAt(tablita.getSelectedRow(), tablita.getSelectedColumn()));
+        Thread proceso2 = new Thread(h);
+        proceso2.start();
+
+    }//GEN-LAST:event_tablitaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -333,6 +363,7 @@ bina bin = new bina("./carros.cbm");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JProgressBar barrita;
     private javax.swing.JComboBox<String> corredor;
     private javax.swing.JTextField identi;
     private javax.swing.JButton jButton1;
@@ -353,7 +384,6 @@ bina bin = new bina("./carros.cbm");
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField largo;
     private javax.swing.JLabel largot;
