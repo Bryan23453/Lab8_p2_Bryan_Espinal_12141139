@@ -66,23 +66,6 @@ public class bina {
     }
 
     
-    public void escribirArchivo() {
-        
-        try {
-            FileOutputStream fw = new FileOutputStream(archivo);
-            ObjectOutputStream bw = new ObjectOutputStream(fw);
-            System.out.println(car.size()+" hola");
-            System.out.println(archivo.getPath());
-            for (Carros t : car) {
-                bw.writeObject(t);
-            }
-            bw.flush();
-            bw.close();
-            fw.close();
-        } catch (Exception ex) {
-        } 
-    }
-    
     public void escribirArchivo2() {
         FileOutputStream fw = null;
         ObjectOutputStream bw = null;

@@ -6,7 +6,10 @@
 package lab8_bryan_espinal_1214113;
 
 import java.awt.Color;
+import static java.awt.Color.white;
 import javax.swing.JColorChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +21,9 @@ bina bin = new bina("./carros.cbm");
     public gui() {
         initComponents();
         bin.cargarArchivo();
+        for (Carros car : bin.getcar()) {
+                corredor.addItem(String.valueOf(car.getNumero()));
+        }
     }
 
     /**
@@ -34,18 +40,18 @@ bina bin = new bina("./carros.cbm");
         jPanel1 = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablita = new javax.swing.JTable();
         corredor = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        largot = new javax.swing.JLabel();
+        pistat = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        nompis = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        largo = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         identi = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -70,8 +76,8 @@ bina bin = new bina("./carros.cbm");
         jProgressBar1.setBackground(new java.awt.Color(204, 0, 204));
         jPanel1.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 680, 80));
 
-        jTable1.setBackground(new java.awt.Color(204, 153, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablita.setBackground(new java.awt.Color(204, 153, 255));
+        tablita.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -79,7 +85,7 @@ bina bin = new bina("./carros.cbm");
                 "Identificador", "Corredor", "Distancia"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablita);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 680, 360));
 
@@ -90,15 +96,15 @@ bina bin = new bina("./carros.cbm");
         jLabel1.setText("Largo:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Roboto", 3, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("______");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
+        largot.setFont(new java.awt.Font("Roboto", 3, 18)); // NOI18N
+        largot.setForeground(new java.awt.Color(255, 255, 255));
+        largot.setText("_______________");
+        jPanel1.add(largot, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Roboto", 3, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("_____");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
+        pistat.setFont(new java.awt.Font("Roboto", 3, 18)); // NOI18N
+        pistat.setForeground(new java.awt.Color(255, 255, 255));
+        pistat.setText("_______________");
+        jPanel1.add(pistat, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Roboto", 3, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -119,13 +125,13 @@ bina bin = new bina("./carros.cbm");
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Nombre Pista");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 570, -1, -1));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, 200, 30));
+        jPanel1.add(nompis, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, 200, 30));
 
         jLabel11.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Largo");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 640, -1, -1));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 630, 200, 30));
+        jPanel1.add(largo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 630, 200, 30));
 
         jLabel12.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -142,11 +148,21 @@ bina bin = new bina("./carros.cbm");
         jButton3.setBackground(new java.awt.Color(185, 96, 245));
         jButton3.setText("Usar Pista");
         jButton3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 680, 200, 40));
 
         jButton4.setBackground(new java.awt.Color(185, 96, 245));
         jButton4.setText("Reiniciar");
         jButton4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 730, 200, 40));
 
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
@@ -210,18 +226,76 @@ bina bin = new bina("./carros.cbm");
     }//GEN-LAST:event_jButton5MouseClicked
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
-            bin.cargarArchivo();
-            bin.setcar(new Carros(nom.getText(),col,Integer.parseInt(identi.getText()),tipo.getSelectedIndex()));
-            bin.escribirArchivo2();
-            corredor.removeAllItems();
-            for (Carros car : bin.getcar()) {
-                corredor.addItem(String.valueOf(car.getNumero()));
+        boolean pass=true;
+        for (Carros car : bin.getcar()) {
+            if (Integer.parseInt(identi.getText())==car.getNumero()) {
+                pass=false;
+                break;
             }
+        }
+        if (pass ) {
+            if (Integer.parseInt(identi.getText())>-1) {
+                bin.cargarArchivo();
+                bin.setcar(new Carros(nom.getText(),col,Integer.parseInt(identi.getText()),tipo.getSelectedIndex()));
+                bin.escribirArchivo2();
+                corredor.removeAllItems();
+                for (Carros car : bin.getcar()) {
+                    corredor.addItem(String.valueOf(car.getNumero()));
+                }
+                JOptionPane.showMessageDialog(this, "Agregado Exitosamente");
+                nom.setText("");
+                identi.setText("");
+                jButton5.setBackground(white);
+            }else{
+                JOptionPane.showMessageDialog(this, "No Puede Tener un Corredor Con un identificador negativo");
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "No Puede Tener 2 Corredores Con El Misomo Nombre");
+        }
+            
     }//GEN-LAST:event_jButton6MouseClicked
 
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
-        corredor.getSelectedIndex();
+        bin.cargarArchivo();
+        DefaultTableModel modelo2=new DefaultTableModel() ;
+        modelo2.addColumn("Identificador");
+        modelo2.addColumn("Corredor");
+        modelo2.addColumn("Distancia");
+        Object[] ob=new Object[3];
+        Carros per = bin.car.get(corredor.getSelectedIndex());
+        boolean pass=true;
+
+            for (int i = 0; i < tablita.getRowCount(); i++) {
+                int t=0;
+                for (int j = 0; j < tablita.getColumnCount(); j++) {
+                    if (t<3) {
+                       ob[t]=tablita.getValueAt(i, j);  
+                    }
+                    t++;
+                    
+                }
+                modelo2.addRow(ob);
+            }
+            ob[0]=per.getNumero();
+            ob[1]=per.getNombre();
+            ob[2]=0;
+            modelo2.addRow(ob);
+            tablita.setModel(modelo2);
+            //JOptionPane.showMessageDialog(this, "No Puede volver a agregar a un corredor que ya participa");
+                 
+            
+        
     }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        pistat.setText(nompis.getText());
+        largot.setText(largo.getText());
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        tablita.removeAll();
+    }//GEN-LAST:event_jButton4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -277,16 +351,16 @@ bina bin = new bina("./carros.cbm");
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField largo;
+    private javax.swing.JLabel largot;
     private javax.swing.JTextField nom;
+    private javax.swing.JTextField nompis;
+    private javax.swing.JLabel pistat;
+    private javax.swing.JTable tablita;
     private javax.swing.JComboBox<String> tipo;
     // End of variables declaration//GEN-END:variables
 }
