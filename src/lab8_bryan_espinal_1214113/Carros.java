@@ -17,6 +17,7 @@ public class Carros implements Serializable{
     Color col;
     int numero;
     int tipo;
+    int distancia;
 
     public Carros() {
     }
@@ -26,6 +27,7 @@ public class Carros implements Serializable{
         this.col = col;
         this.numero = numero;
         this.tipo=tipo;
+        this.distancia=0;
     }
 
     public String getNombre() {
@@ -50,6 +52,22 @@ public class Carros implements Serializable{
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    public int getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(int distancia) {
+        this.distancia = distancia;
     }
     
 }

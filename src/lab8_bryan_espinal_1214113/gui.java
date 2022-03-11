@@ -7,6 +7,7 @@ package lab8_bryan_espinal_1214113;
 
 import java.awt.Color;
 import static java.awt.Color.white;
+import java.util.ArrayList;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class gui extends javax.swing.JFrame {
 Color col=white;
 bina bin = new bina("./carros.cbm");
+ArrayList <Carros> carr=new ArrayList();
     public gui() {
         initComponents();
         bin.cargarArchivo();
@@ -269,6 +271,7 @@ bina bin = new bina("./carros.cbm");
 
     private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
         bin.cargarArchivo();
+        carr.add(bin.car.get(corredor.getSelectedIndex()));
         DefaultTableModel modelo2=new DefaultTableModel() ;
         modelo2.addColumn("Identificador");
         modelo2.addColumn("Corredor");
@@ -276,7 +279,6 @@ bina bin = new bina("./carros.cbm");
         Object[] ob=new Object[3];
         Carros per = bin.car.get(corredor.getSelectedIndex());
         boolean pass=true;
-
             for (int i = 0; i < tablita.getRowCount(); i++) {
                 int t=0;
                 for (int j = 0; j < tablita.getColumnCount(); j++) {
@@ -290,7 +292,7 @@ bina bin = new bina("./carros.cbm");
             }
             ob[0]=per.getNumero();
             ob[1]=per.getNombre();
-            ob[2]=0;
+            ob[2]=per.getDistancia();
             modelo2.addRow(ob);
             tablita.setModel(modelo2);
             //JOptionPane.showMessageDialog(this, "No Puede volver a agregar a un corredor que ya participa");
@@ -313,17 +315,15 @@ bina bin = new bina("./carros.cbm");
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        for (int i = 0; i < tablita.getRowCount(); i++) {
-                tablita.getValueAt(i, 1);
-                
-        }
+        hilo h=new hilo(barrita ,carr,Integer.valueOf(largot.getText()),tablita);
+        Thread proceso2 = new Thread(h);
+        
+        proceso2.start();
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void tablitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablitaMouseClicked
         System.out.println(tablita.getSelectedRow());
-        hilo h=new hilo(barrita , tablita.getValueAt(tablita.getSelectedRow(), tablita.getSelectedColumn()));
-        Thread proceso2 = new Thread(h);
-        proceso2.start();
+        
 
     }//GEN-LAST:event_tablitaMouseClicked
 
