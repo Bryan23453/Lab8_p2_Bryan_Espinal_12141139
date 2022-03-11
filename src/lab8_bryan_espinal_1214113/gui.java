@@ -6,7 +6,7 @@
 package lab8_bryan_espinal_1214113;
 
 import java.awt.Color;
-import java.util.ArrayList;
+import javax.swing.JColorChooser;
 
 /**
  *
@@ -14,10 +14,10 @@ import java.util.ArrayList;
  */
 public class gui extends javax.swing.JFrame {
 Color col;
-ArrayList <Carros> car=new ArrayList();
-
+bina bin = new bina("./carros.cbm");
     public gui() {
         initComponents();
+        bin.cargarArchivo();
     }
 
     /**
@@ -35,7 +35,7 @@ ArrayList <Carros> car=new ArrayList();
         jProgressBar1 = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        corredor = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -47,14 +47,14 @@ ArrayList <Carros> car=new ArrayList();
         jLabel11 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        identi = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        nom = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        tipo = new javax.swing.JComboBox<>();
         jButton7 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -83,7 +83,7 @@ ArrayList <Carros> car=new ArrayList();
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 680, 360));
 
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 210, 30));
+        jPanel1.add(corredor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 210, 30));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -131,13 +131,13 @@ ArrayList <Carros> car=new ArrayList();
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Numero Identificador");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 610, -1, -1));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 600, 170, 30));
+        jPanel1.add(identi, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 600, 170, 30));
 
         jLabel13.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Nombre Corredor");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 650, -1, -1));
-        jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 650, 170, 30));
+        jPanel1.add(nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 650, 170, 30));
 
         jButton3.setBackground(new java.awt.Color(185, 96, 245));
         jButton3.setText("Usar Pista");
@@ -149,9 +149,10 @@ ArrayList <Carros> car=new ArrayList();
         jButton4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 730, 200, 40));
 
-        jButton5.setBackground(new java.awt.Color(185, 96, 245));
+        jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Color");
         jButton5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton5.setBorderPainted(false);
         jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton5MouseClicked(evt);
@@ -162,15 +163,25 @@ ArrayList <Carros> car=new ArrayList();
         jButton6.setBackground(new java.awt.Color(185, 96, 245));
         jButton6.setText("Guardar");
         jButton6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
         jPanel1.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 740, 170, 40));
 
-        jComboBox2.setBackground(new java.awt.Color(185, 96, 245));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 690, 120, 30));
+        tipo.setBackground(new java.awt.Color(185, 96, 245));
+        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "McQueen", "Convertible", "Nascar" }));
+        jPanel1.add(tipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 690, 120, 30));
 
         jButton7.setBackground(new java.awt.Color(145, 90, 254));
         jButton7.setText("Agregar");
         jButton7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
         jPanel1.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 550, 90, 30));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lab8_bryan_espinal_1214113/imagen/fondo2.jpg"))); // NOI18N
@@ -194,8 +205,23 @@ ArrayList <Carros> car=new ArrayList();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        
+        col=JColorChooser.showDialog(this, "elija un color", col);
+        jButton5.setBackground(col);
     }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+            bin.cargarArchivo();
+            bin.setcar(new Carros(nom.getText(),col,Integer.parseInt(identi.getText()),tipo.getSelectedIndex()));
+            bin.escribirArchivo2();
+            corredor.removeAllItems();
+            for (Carros car : bin.getcar()) {
+                corredor.addItem(String.valueOf(car.getNumero()));
+            }
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        corredor.getSelectedIndex();
+    }//GEN-LAST:event_jButton7MouseClicked
 
     /**
      * @param args the command line arguments
@@ -233,6 +259,8 @@ ArrayList <Carros> car=new ArrayList();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> corredor;
+    private javax.swing.JTextField identi;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -240,8 +268,6 @@ ArrayList <Carros> car=new ArrayList();
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -260,7 +286,7 @@ ArrayList <Carros> car=new ArrayList();
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField nom;
+    private javax.swing.JComboBox<String> tipo;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,23 +6,26 @@
 package lab8_bryan_espinal_1214113;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 /**
  *
  * @author bryan
  */
-public class Carros {
+public class Carros implements Serializable{
     String Nombre;
     Color col;
     int numero;
+    int tipo;
 
     public Carros() {
     }
 
-    public Carros(String Nombre, Color col, int numero) {
+    public Carros(String Nombre, Color col, int numero,int tipo) {
         this.Nombre = Nombre;
         this.col = col;
         this.numero = numero;
+        this.tipo=tipo;
     }
 
     public String getNombre() {
