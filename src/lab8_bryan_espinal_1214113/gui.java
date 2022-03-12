@@ -312,17 +312,23 @@ ArrayList <Carros> carr=new ArrayList();
         modelo2.addColumn("Corredor");
         modelo2.addColumn("Distancia");
         tablita.setModel(modelo2);
+        carr.removeAll(carr);
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        barrita.setMaximum(Integer.valueOf(largot.getText()));
-        hilo h=new hilo(barrita ,carr,Integer.valueOf(largot.getText()),tablita);
-        Thread proceso2 = new Thread(h);
-        proceso2.start();
+        try {
+            barrita.setMaximum(Integer.valueOf(largot.getText()));
+            hilo h=new hilo(barrita ,carr,Integer.valueOf(largot.getText()),tablita);
+            Thread proceso2 = new Thread(h);
+            proceso2.start();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Por Favor Asegurece que haya Ingresado un largo a la pista ");
+        }
+        
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-
+    JOptionPane.showMessageDialog(this, "perdon no se como hacerlo");
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**

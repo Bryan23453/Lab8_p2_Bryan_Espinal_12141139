@@ -6,6 +6,8 @@
 package lab8_bryan_espinal_1214113;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
@@ -77,6 +79,20 @@ import javax.swing.table.DefaultTableModel;
                 for (int i = 0; i < a.size(); i++) {
                     tablita.setValueAt(a.get(i).getDistancia(), i,2  );
                 }
+                
+               /* Object[] osb=new Object[tablita.getRowCount()];
+                int t=0;
+                for (int i = 0; i < tablita.getRowCount(); i++) {
+                        osb[t]=tablita.getValueAt(i, 2);  
+                        t++;
+                    
+                }
+                Arrays.sort(osb, Collections.reverseOrder());
+                for (int i = 0; i < osb.length; i++) {
+                System.out.println(osb[i]);
+            }*/
+                
+                
                 try {
                     barra.setValue(a.get(tablita.getSelectedRow()).getDistancia());
                     System.out.println(tablita.getSelectedRow());
@@ -94,6 +110,7 @@ import javax.swing.table.DefaultTableModel;
             int pass=0;
             for (Carros carros : a) {
                 if (carros.getDistancia()>pass) {
+                    pass=carros.getDistancia();
                     b=carros;
                 }
             }
