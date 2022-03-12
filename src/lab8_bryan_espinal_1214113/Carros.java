@@ -69,5 +69,10 @@ public class Carros implements Serializable{
     public void setDistancia(int distancia) {
         this.distancia += distancia;
     }
+
+    @Override
+    public String toString() {
+        return "gana el carro " +  numero +"Conducido Por "+Nombre+" con una Distancia Recorrida de "+distancia+" Kilometros";
+    }
     
 }

@@ -17,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
  */
     public class hilo extends Thread{
     private JProgressBar barra;
-    private boolean avanzar;
     private boolean vive;
     int tam;
     JTable tablita;
@@ -25,7 +24,6 @@ import javax.swing.table.DefaultTableModel;
     Random r=new Random();
     public hilo(JProgressBar barra, ArrayList a,int tam,JTable A) {
         this.barra = barra;
-        avanzar=true;
         vive=true;
         this.a=a;
         this.tablita=A;
@@ -37,15 +35,6 @@ import javax.swing.table.DefaultTableModel;
 
     public void setVive(boolean vive) {
         this.vive = vive;
-    }
-
-
-    public boolean getAvanzar() {
-        return avanzar;
-    }
-
-    public void setAvanzar(boolean avanzar) {
-        this.avanzar = avanzar;
     }
 
 
@@ -73,22 +62,36 @@ import javax.swing.table.DefaultTableModel;
                     break;
                     case 2:{
                         a.get(i).setDistancia(40+r.nextInt(180));
+                        
                     }
                     
                 }
             }
-            System.out.println(a.size());
+            try {
+                barra.setValue(a.get(tablita.getSelectedRow()).getDistancia());
+            } catch (Exception e) {} 
             for (int i = 0; i < a.size(); i++) {
                 tablita.setValueAt(a.get(i).getDistancia(), i,2  );
             }
             try {
                 barra.setValue(a.get(tablita.getSelectedRow()).getDistancia());
                 System.out.println(tablita.getSelectedRow());
-            } catch (Exception e) {
-            }  
+            } catch (Exception e) {}  
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
+            }
+            for (Carros carros : a) {
+                if (carros.getDistancia()>tam) {
+                    vive=false;
+                }
+            }
+        }
+        for (Carros carros : a) {
+            int pass=0;
+            Carros b;
+            if (carros.getDistancia()>pass) {
+                b=carros;
             }
         }
             
