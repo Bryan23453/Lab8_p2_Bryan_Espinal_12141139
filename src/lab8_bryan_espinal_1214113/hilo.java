@@ -6,8 +6,10 @@
 package lab8_bryan_espinal_1214113;
 
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JProgressBar;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +22,7 @@ import javax.swing.JTable;
     int tam;
     JTable tablita;
     ArrayList<Carros> a=new ArrayList();
+    Random r=new Random();
     public hilo(JProgressBar barra, ArrayList a,int tam,JTable A) {
         this.barra = barra;
         avanzar=true;
@@ -56,28 +59,42 @@ import javax.swing.JTable;
     
     @Override
     public void run(){
-       barra.setValue(6);
-       try {
-                Thread.sleep(0);
-            } catch (InterruptedException ex) {
-            }
-       barra.setValue(10);
         while(vive){
-            if(avanzar){
-                
-                barra.setValue(a.get(tablita.getSelectedRow()).getDistancia());
-                if(barra.getValue()==tam){
-                    vive=false;
-                }                
-            } //FIN IF
-            
+            for (int i = 0; i < a.size(); i++) {
+                int tip=a.get(i).getTipo();
+                switch (tip){
+                    case 0:{
+                        a.get(i).setDistancia(30+r.nextInt(190));
+                    }
+                    break;
+                    case 1:{
+                        a.get(i).setDistancia(20+r.nextInt(200));
+                    }
+                    break;
+                    case 2:{
+                        a.get(i).setDistancia(40+r.nextInt(180));
+                    }
+                    
+                }
+            }
+            System.out.println(a.size());
+            for (int i = 0; i < a.size(); i++) {
+                tablita.setValueAt(a.get(i).getDistancia(), i,2  );
+            }
             try {
-                Thread.sleep(0);
+                barra.setValue(a.get(tablita.getSelectedRow()).getDistancia());
+                System.out.println(tablita.getSelectedRow());
+            } catch (Exception e) {
+            }  
+            try {
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
             }
+        }
+            
         }
     }
 
     
-}
+
 

@@ -76,7 +76,7 @@ ArrayList <Carros> carr=new ArrayList();
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         barrita.setBackground(new java.awt.Color(204, 0, 204));
-        barrita.setMaximum(10);
+        barrita.setMaximum(1000);
         jPanel1.add(barrita, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 680, 80));
 
         tablita.setBackground(new java.awt.Color(204, 153, 255));
@@ -88,11 +88,6 @@ ArrayList <Carros> carr=new ArrayList();
                 "Identificador", "Corredor", "Distancia"
             }
         ));
-        tablita.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablitaMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tablita);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 680, 360));
@@ -315,17 +310,11 @@ ArrayList <Carros> carr=new ArrayList();
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        barrita.setMaximum(Integer.valueOf(largot.getText()));
         hilo h=new hilo(barrita ,carr,Integer.valueOf(largot.getText()),tablita);
         Thread proceso2 = new Thread(h);
-        
         proceso2.start();
     }//GEN-LAST:event_jButton2MouseClicked
-
-    private void tablitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablitaMouseClicked
-        System.out.println(tablita.getSelectedRow());
-        
-
-    }//GEN-LAST:event_tablitaMouseClicked
 
     /**
      * @param args the command line arguments

@@ -67,7 +67,7 @@ public class Carros implements Serializable{
     }
 
     public void setDistancia(int distancia) {
-        this.distancia = distancia;
+        this.distancia += distancia;
     }
     
 }
