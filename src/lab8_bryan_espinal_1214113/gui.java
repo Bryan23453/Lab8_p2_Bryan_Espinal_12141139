@@ -304,6 +304,9 @@ ArrayList <Carros> carr=new ArrayList();
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         pistat.setText(nompis.getText());
         largot.setText(largo.getText());
+        JOptionPane.showMessageDialog(this, "Pista Agregada");
+        nompis.setText("");
+        largo.setText("");
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
