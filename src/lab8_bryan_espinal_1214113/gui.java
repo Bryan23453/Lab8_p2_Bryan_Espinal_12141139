@@ -127,6 +127,11 @@ ArrayList <Carros> carr=new ArrayList();
         jButton1.setBackground(new java.awt.Color(79, 100, 255));
         jButton1.setText("Pausar");
         jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 90, 40));
 
         jLabel10.setFont(new java.awt.Font("Roboto", 3, 14)); // NOI18N
@@ -315,6 +320,10 @@ ArrayList <Carros> carr=new ArrayList();
         Thread proceso2 = new Thread(h);
         proceso2.start();
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments

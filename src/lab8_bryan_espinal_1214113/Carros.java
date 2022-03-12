@@ -72,7 +72,7 @@ public class Carros implements Serializable{
 
     @Override
     public String toString() {
-        return "gana el carro " +  numero +"Conducido Por "+Nombre+" con una Distancia Recorrida de "+distancia+" Kilometros";
+        return "gana el carro " +  numero +" Conducido Por "+Nombre+" con una Distancia Recorrida de "+distancia+" Kilometros";
     }
     
 }
